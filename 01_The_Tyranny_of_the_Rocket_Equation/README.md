@@ -2,6 +2,7 @@
 
 ## Prerequisites:
 *	Python3.x
+*   Node
 
 ### --- Part One ---
 > Santa has become stranded at the edge of the Solar System while delivering presents to other planets! To accurately calculate his position in space, safely align his warp drive, and return to Earth in time to save Christmas, he needs you to bring him measurements from fifty stars.
@@ -25,6 +26,7 @@ The Fuel Counter-Upper needs to know the total fuel requirement. To find it, ind
 What is the sum of the fuel requirements for all of the modules on your spacecraft?
 ```sh
 $ python solution.py
+$ node solution.js
 ```
 
 ### --- Part Two ---
@@ -41,4 +43,5 @@ The fuel required by a module of mass 100756 and its fuel is: 33583 + 11192 + 37
 What is the sum of the fuel requirements for all of the modules on your spacecraft when also taking into account the mass of the added fuel? (Calculate the fuel requirements for each module separately, then add them all up at the end.)
 ```sh
 $ python solution.py 2
+$ node solution.js 2
 ```
