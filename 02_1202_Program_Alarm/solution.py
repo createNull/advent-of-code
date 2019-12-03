@@ -35,5 +35,5 @@ def get_output(input_list, noun, verb):
     return output_list[0]
 
 
-print(get_result(12, 2))
-print(get_result(output=19690720))
+print('Part 1: ', get_result(12, 2))
+print('Part 2: ', get_result(output=19690720))
