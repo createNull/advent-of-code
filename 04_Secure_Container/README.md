@@ -3,7 +3,7 @@
 ## Prerequisites:
 *	Python3.x
 
-### --- Part Two ---
+### --- Part One ---
 > You arrive at the Venus fuel depot only to discover it's protected by a password. The Elves had written the password on a sticky note, but someone threw it out.
 
 > However, they do remember a few key facts about the password:
@@ -30,3 +30,6 @@ How many different passwords within the range given in your puzzle input meet th
 111122 meets the criteria (even though 1 is repeated more than twice, it still contains a double 22).
 ```
 How many different passwords within the range given in your puzzle input meet all of the criteria?
+```sh
+$ python solution.py
+```
