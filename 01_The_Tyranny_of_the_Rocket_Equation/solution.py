@@ -11,9 +11,7 @@ def required_fuel(mass):
 
 def mass_fuel(mass):
     fuel = required_fuel(mass)
-    if fuel >= 0:
-        return fuel + mass_fuel(fuel)
-    return 0
+    return fuel + mass_fuel(fuel) if fuel >= 0 else 0
 
 
 def calc_total_fuel(array, option):
