@@ -1,17 +1,19 @@
 from operator import add, mul
 
 
+with open('input.txt', 'r') as f:
+    input_array = list(map(int, f.read().split(',')))
+
+
 def get_result(noun=None, verb=None, output=None):
-    with open('input.txt', 'r') as file:
-        input_list = [int(elem) for elem in file.read().split(',')]
-        if output:
-            for noun in range(100):
-                for verb in range(100):
-                    temp = get_output(input_list, noun, verb)
-                    if temp == output:
-                        return 100 * noun + verb
-        output = get_output(input_list, noun, verb)
-        return output
+    if output:
+        for noun in range(100):
+            for verb in range(100):
+                temp = get_output(input_array, noun, verb)
+                if temp == output:
+                    return 100 * noun + verb
+    output = get_output(input_array, noun, verb)
+    return output
 
 
 def get_output(input_list, noun, verb):
