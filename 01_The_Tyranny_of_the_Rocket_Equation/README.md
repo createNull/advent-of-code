@@ -24,10 +24,6 @@ For a mass of 100756, the fuel required is 33583.
 The Fuel Counter-Upper needs to know the total fuel requirement. To find it, individually calculate the fuel needed for the mass of each module (your puzzle input), then add together all the fuel values.
 
 What is the sum of the fuel requirements for all of the modules on your spacecraft?
-```sh
-$ python solution.py
-$ node solution.js
-```
 
 ### --- Part Two ---
 > During the second Go / No Go poll, the Elf in charge of the Rocket Equation Double-Checker stops the launch sequence. Apparently, you forgot to include additional fuel for the fuel you just added.
@@ -42,6 +38,6 @@ The fuel required by a module of mass 100756 and its fuel is: 33583 + 11192 + 37
 
 What is the sum of the fuel requirements for all of the modules on your spacecraft when also taking into account the mass of the added fuel? (Calculate the fuel requirements for each module separately, then add them all up at the end.)
 ```sh
-$ python solution.py 2
-$ node solution.js 2
+$ python solution.py
+$ node solution.js
 ```
