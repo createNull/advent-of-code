@@ -65,7 +65,7 @@ What is the total number of direct and indirect orbits in your map data?
 
 > You start at the object YOU are orbiting; your destination is the object SAN is orbiting. An orbital transfer lets you move from any object to an object orbiting or orbited by that object.
 
-For example, suppose you have the following map:
+> For example, suppose you have the following map:
 ```
 COM)B
 B)C
