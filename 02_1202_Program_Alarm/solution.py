@@ -18,19 +18,19 @@ def get_output(array, noun, verb):
 
     i = 0
     while i < len(array):
-        code = str(array[i]).zfill(4)
-        opcode = code[-2:]
+        opcode = array[i]
         noun, verb, output_pos = array[i + 1], array[i + 2], array[i + 3]
 
-        if opcode == "99":
+        if opcode == 99:
             break
-        elif opcode == "01":
+        elif opcode == 1:
             array[output_pos] = array[noun] + array[verb]
-        elif opcode == "02":
+        elif opcode == 2:
             array[output_pos] = array[noun] * array[verb]
         else:
             return "Opcode doesn't have a valid value."
         i += 4
+        
     return array[0]
 
 
