@@ -1,4 +1,24 @@
+from collections import Counter
+
+
 problem_input = '353096-843212'
+
+
+def has_sorted_digits(element):
+    return ''.join(sorted(element)) == element
+
+
+def has_equal_adjacent_digits(element):
+    if has_sorted_digits(element):
+        return len(set(element)) <= len(element) - 1
+
+
+def has_two_equal_adjacent_digits(element):
+    if has_sorted_digits(element):
+        for digit in set(element):
+            if element.count(digit) == 2:
+                return True
+        # return 2 in Counter(element).values()
 
 
 def get_result(interval, option):
@@ -6,19 +26,13 @@ def get_result(interval, option):
     # upper limit and lower limit of the interval
     count = 0
     for num in range(up, low):
-        list_num = list(str(num))
-        done = False
-        if sorted(list_num) == list_num:
-            for i in range(len(list_num) - 1):
-                if list_num[i] == list_num[i + 1]:
-                    if option == 1:
-                        done = True
-                    elif option == 2:
-                        adjacent = list_num[i]
-                        if list_num.count(adjacent) == 2:
-                            done = True
-        if done:
+        num_str = str(num)
+
+        if option == 1 and has_equal_adjacent_digits(num_str):
             count += 1
+        elif option == 2 and has_two_equal_adjacent_digits(num_str):
+            count += 1
+
     return count
 
 
