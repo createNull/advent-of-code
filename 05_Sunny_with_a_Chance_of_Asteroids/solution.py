@@ -2,7 +2,7 @@ with open('input.txt') as f:
     puzzle_input = list(map(int, f.read().split(',')))
 
 
-def get_result(array, id):
+def get_result(array, input_id):
     i = 0
     while i < len(array):
         # Make code 5 digits
@@ -17,7 +17,7 @@ def get_result(array, id):
 
         param1 = array[i + 1] if mode_1 == "0" else i + 1
         param2 = array[i + 2] if mode_2 == "0" else i + 2
-        param3 = array[i + 3] if mode_3 == "0" else i + 3
+        param3 = array[i + 3]
 
         if opcode == 1:
             array[param3] = array[param1] + array[param2]
@@ -26,7 +26,7 @@ def get_result(array, id):
             array[param3] = array[param1] * array[param2]
             i += 4
         elif opcode == 3:
-            array[param1] = id
+            array[param1] = input_id
             i += 2
         elif opcode == 4:
             output_value = array[param1]
@@ -42,7 +42,7 @@ def get_result(array, id):
             array[param3] = 1 if array[param1] == array[param2] else 0
             i += 4
         else:
-            return "Opcode doesn't have a valid value."
+            return f"Opcode {opcode} doesn't have a valid value."
 
     return output_value
 
