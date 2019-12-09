@@ -1,5 +1,5 @@
 with open('input.txt') as f:
-    input_array = list(map(int, f.read().split(',')))
+    puzzle_input = list(map(int, f.read().split(',')))
 
 
 def get_result(array, id):
@@ -47,5 +47,5 @@ def get_result(array, id):
     return output_value
 
 
-print('Part 1:', get_result(input_array.copy(), 1))
-print('Part 2:', get_result(input_array.copy(), 5))
+print('Part 1:', get_result(puzzle_input.copy(), 1))
+print('Part 2:', get_result(puzzle_input.copy(), 5))

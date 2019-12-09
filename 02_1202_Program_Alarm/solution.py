@@ -1,15 +1,15 @@
 with open('input.txt') as f:
-    input_array = list(map(int, f.read().split(',')))
+    puzzle_input = list(map(int, f.read().split(',')))
 
 
-def get_result(noun=None, verb=None, output=None):
+def get_result(array, noun=None, verb=None, output=None):
     if output:
         for noun in range(100):
             for verb in range(100):
-                temp = get_output(input_array.copy(), noun, verb)
+                temp = get_output(array.copy(), noun, verb)
                 if temp == output:
                     return 100 * noun + verb
-    output = get_output(input_array.copy(), noun, verb)
+    output = get_output(array.copy(), noun, verb)
     return output
 
 
@@ -34,5 +34,5 @@ def get_output(array, noun, verb):
     return array[0]
 
 
-print('Part 1: ', get_result(12, 2))
-print('Part 2: ', get_result(output=19690720))
+print('Part 1: ', get_result(puzzle_input, noun=12, verb=2))
+print('Part 2: ', get_result(puzzle_input, output=19690720))

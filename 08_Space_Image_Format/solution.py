@@ -1,7 +1,7 @@
 width, height = 25, 6
 
 with open('input.txt') as f:
-    input_str = f.read().rstrip('\n')
+    puzzle_input = f.read().rstrip('\n')
 
 
 def string_divide(string, div):
@@ -27,5 +27,5 @@ def get_result(string, option):
         return ''.join(image).replace('1', '█')
 
 
-print('Part 1:', get_result(input_str, 1))
-print('Part 2:', get_result(input_str, 2))
+print('Part 1:', get_result(puzzle_input, 1))
+print('Part 2:', get_result(puzzle_input, 2))

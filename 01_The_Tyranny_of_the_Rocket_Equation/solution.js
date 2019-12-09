@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const array = fs.readFileSync('input.txt').toString().split(
+const puzzle_input = fs.readFileSync('input.txt').toString().split(
     "\n").filter(Boolean).map(Number)
 
 const calcTotalFuel = (input, option) =>
@@ -16,5 +16,5 @@ const massFuel = (mass) => {
     return fuel < 0 ? 0 : fuel + massFuel(fuel)
 }
 
-console.log('Part 1: ', calcTotalFuel(array))
-console.log('Part 2: ', calcTotalFuel(array, 2))
+console.log('Part 1: ', calcTotalFuel(puzzle_input))
+console.log('Part 2: ', calcTotalFuel(puzzle_input, 2))

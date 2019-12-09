@@ -1,7 +1,4 @@
-from collections import Counter
-
-
-problem_input = '353096-843212'
+puzzle_input = '353096-843212'
 
 
 def has_sorted_digits(element):
@@ -18,11 +15,11 @@ def has_two_equal_adjacent_digits(element):
         for digit in set(element):
             if element.count(digit) == 2:
                 return True
-        # return 2 in Counter(element).values()
+        # return 2 in Counter(element).values()  ## short version
 
 
 def get_result(interval, option):
-    up, low = list(map(int, problem_input.split('-')))
+    up, low = list(map(int, puzzle_input.split('-')))
     # upper limit and lower limit of the interval
     count = 0
     for num in range(up, low):
@@ -36,5 +33,5 @@ def get_result(interval, option):
     return count
 
 
-print('Part 1: ', get_result(problem_input, 1))
-print('Part 2: ', get_result(problem_input, 2))
+print('Part 1: ', get_result(puzzle_input, 1))
+print('Part 2: ', get_result(puzzle_input, 2))
