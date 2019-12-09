@@ -15,18 +15,18 @@ def get_result(string, option):
     layers = string_divide(string, width * height)
 
     if option == 1:
-        min_count, i = min((layer.count('0'), i)
-                           for i, layer in enumerate(layers))
-        return layers[i].count('1') * layers[i].count('2')
+        _, fewest_zeros = min((layer.count('0'), layers[i])
+                              for i, layer in enumerate(layers))
+        return fewest_zeros.count('1') * fewest_zeros.count('2')
 
     elif option == 2:
         image = []
-        for i in range(width * height):
-            if i % width == 0:
+        for pixel in range(width * height):
+            if pixel % width == 0:
                 image.append('\n')
-            for j in range(i, len(string), width * height):
-                if string[j] != '2':
-                    image.append(string[j])
+            for pos in range(pixel, len(string), width * height):
+                if string[pos] != '2':
+                    image.append(string[pos])
                     break
         return ''.join(image).replace('1', '█')
 
