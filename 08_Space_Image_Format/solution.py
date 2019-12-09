@@ -22,7 +22,7 @@ def get_result(string, option):
     elif option == 2:
         image = []
         for i in range(width * height):
-            if i % width == 0 and i != 0:
+            if i % width == 0:
                 image.append('\n')
             for j in range(i, len(string), width * height):
                 if string[j] != '2':
@@ -32,4 +32,4 @@ def get_result(string, option):
 
 
 print('Part 1:', get_result(input_str, 1))
-print(f'Part 2: \n{get_result(input_str, 2)}')
+print('Part 2:', get_result(input_str, 2))
