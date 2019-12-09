@@ -1,7 +1,7 @@
 width, height = 25, 6
 
-with open('input.txt') as file:
-    input_str = file.read().rstrip('\n')
+with open('input.txt') as f:
+    input_str = f.read().rstrip('\n')
 
 
 def string_divide(string, div):

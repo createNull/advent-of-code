@@ -1,4 +1,4 @@
-with open('input.txt', 'r') as f:
+with open('input.txt') as f:
     input_array = list(map(int, f.read().split(',')))
 
 
@@ -30,7 +30,7 @@ def get_output(array, noun, verb):
         else:
             return "Opcode doesn't have a valid value."
         i += 4
-        
+
     return array[0]
 
 
