@@ -5,18 +5,14 @@ with open('input.txt') as file:
 
 
 def string_divide(string, div):
-    arr = []
-    for i in range(0, len(string), div):
-        arr.append(string[i:i+div])
-    return arr
+    return [string[i:i+div] for i in range(0, len(string), div)]
 
 
 def get_result(string, option):
     layers = string_divide(string, width * height)
 
     if option == 1:
-        _, fewest_zeros = min((layer.count('0'), layers[i])
-                              for i, layer in enumerate(layers))
+        _, fewest_zeros = min((layer.count('0'), layer) for layer in layers)
         return fewest_zeros.count('1') * fewest_zeros.count('2')
 
     elif option == 2:
