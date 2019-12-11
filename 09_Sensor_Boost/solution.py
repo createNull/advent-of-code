@@ -35,7 +35,6 @@ def get_result(array, input_id):
             array[param3] = array[param1] * array[param2]
             i += 4
         elif opcode == 3:
-            param1 = rel_base if mode_1 == 2 else param1
             array[param1] = input_id
             i += 2
         elif opcode == 4:
