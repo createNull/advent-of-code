@@ -1,113 +1,117 @@
-import os
 from itertools import permutations
-import math
+
+
+with open('input.txt') as f:
+    puzzle_input = list(map(int, f.read().split(',')))
 
 
 class IntcodeComputer:
 
-    def __init__(self, program_input, phase_setting=None):
-        self.program_input = program_input[:]
+    def __init__(self, array, phase_setting=None):
+        self.array = array.copy()
         self.inputs = []
-        self.pointer = 0
+        self.pos = 0
         if phase_setting != None:
             self.inputs.append(phase_setting)
 
-    def __read__(self, mode, param_no):
+    def get_param(self, mode, param_no):
         if mode == '1':
-            return self.pointer + param_no
+            return self.pos + param_no
         else:
-            return self.program_input[self.pointer + param_no]
+            return self.array[self.pos + param_no]
 
-    def run_program(self, signal=None):
-        instruction = str(self.program_input[self.pointer]).zfill(5)
-
+    def get_output_signal(self, signal=None):
         if signal != None:
             self.inputs.append(signal)
 
-        while instruction[-2:] != '99':
-            opcode, first_param_mode, second_param_mode, third_param_mode = instruction[
-                -2:], instruction[2], instruction[1], instruction[0]
-            if opcode in ('03', '04'):
-                first_param = self.__read__(first_param_mode, 1)
-            if opcode in ('05', '06'):
-                first_param = self.__read__(first_param_mode, 1)
-                second_param = self.__read__(second_param_mode, 2)
-            if opcode in ('01', '02', '07', '08'):
-                first_param = self.__read__(first_param_mode, 1)
-                second_param = self.__read__(second_param_mode, 2)
-                third_param = self.__read__(third_param_mode, 3)
+        while self.pos < len(self.array):
+            code = str(self.array[self.pos]).zfill(5)
 
-            if opcode == '01':
-                self.program_input[third_param] = self.program_input[first_param] + \
-                    self.program_input[second_param]
-                self.pointer += 4
-            elif opcode == '02':
-                self.program_input[third_param] = self.program_input[first_param] * \
-                    self.program_input[second_param]
-                self.pointer += 4
-            elif opcode == '03':
-                self.program_input[first_param] = self.inputs.pop(0)
-                self.pointer += 2
-            elif opcode == '04':
-                self.pointer += 2
-                return self.program_input[first_param]
-            elif opcode == '05':
-                if self.program_input[first_param] != 0:
-                    self.pointer = self.program_input[second_param]
-                else:
-                    self.pointer += 3
-            elif opcode == '06':
-                if self.program_input[first_param] == 0:
-                    self.pointer = self.program_input[second_param]
-                else:
-                    self.pointer += 3
-            elif opcode == '07':
-                if self.program_input[first_param] < self.program_input[second_param]:
-                    self.program_input[third_param] = 1
-                else:
-                    self.program_input[third_param] = 0
-                self.pointer += 4
-            elif opcode == '08':
-                if self.program_input[first_param] == self.program_input[second_param]:
-                    self.program_input[third_param] = 1
-                else:
-                    self.program_input[third_param] = 0
-                self.pointer += 4
-            else:
-                raise Exception(f'{instruction}, {opcode}')
+            opcode, mode1, mode2, mode3 = int(
+                code[-2:]), code[2], code[1], code[0]
 
-            instruction = str(self.program_input[self.pointer]).zfill(5)
-
-
-if __name__ == '__main__':
-    with open('input.txt', 'r') as reader:
-        puzzle_input = [int(value) for value in reader.read().split(',')]
-
-    part1 = -math.inf
-    for phase_setting_config in permutations(range(5)):
-        amplifiers = [IntcodeComputer(puzzle_input, phase_setting)
-                      for phase_setting in phase_setting_config]
-
-        previous_amplifier_output = 0
-        for amplifier in amplifiers:
-            previous_amplifier_output = amplifier.run_program(
-                previous_amplifier_output)
-        part1 = max(previous_amplifier_output, part1)
-    print(part1)
-
-    part2 = -math.inf
-    for phase_setting_config in permutations(range(5, 10)):
-        amplifiers = [IntcodeComputer(puzzle_input, phase_setting)
-                      for phase_setting in phase_setting_config]
-
-        previous_amplifier_output = 0
-        while True:
-            for amplifier in amplifiers:
-                previous_amplifier_output = amplifier.run_program(
-                    previous_amplifier_output)
-
-            if previous_amplifier_output:
-                part2 = max(previous_amplifier_output, part2)
-            else:
+            if opcode == 99:
                 break
-    print(part2)
+            elif opcode in (3, 4):
+                param1 = self.get_param(mode1, 1)
+            elif opcode in (5, 6):
+                param1 = self.get_param(mode1, 1)
+                param2 = self.get_param(mode2, 2)
+            else:
+                param1 = self.get_param(mode1, 1)
+                param2 = self.get_param(mode2, 2)
+                param3 = self.get_param(mode3, 3)
+
+            if opcode == 1:
+                self.array[param3] = self.array[param1] + self.array[param2]
+                self.pos += 4
+            elif opcode == 2:
+                self.array[param3] = self.array[param1] * self.array[param2]
+                self.pos += 4
+            elif opcode == 3:
+                self.array[param1] = self.inputs.pop(0)
+                self.pos += 2
+            elif opcode == 4:
+                self.pos += 2
+                return self.array[param1]
+            elif opcode == 5:
+                if self.array[param1] != 0:
+                    self.pos = self.array[param2]
+                else:
+                    self.pos += 3
+            elif opcode == 6:
+                if self.array[param1] == 0:
+                    self.pos = self.array[param2]
+                else:
+                    self.pos += 3
+            elif opcode == 7:
+                if self.array[param1] < self.array[param2]:
+                    self.array[param3] = 1
+                else:
+                    self.array[param3] = 0
+                self.pos += 4
+            elif opcode == 8:
+                if self.array[param1] == self.array[param2]:
+                    self.array[param3] = 1
+                else:
+                    self.array[param3] = 0
+                self.pos += 4
+            else:
+                return f"Opcode {opcode} doesn't have a valid value."
+
+
+def get_result(array, option):
+    total = []
+    if option == 1:
+        for phase_setting_config in permutations(range(5)):
+            amplifiers = [IntcodeComputer(array, phase_setting)
+                          for phase_setting in phase_setting_config]
+
+            previous_amplifier_output = 0
+
+            for amplifier in amplifiers:
+                previous_amplifier_output = amplifier.get_output_signal(
+                    previous_amplifier_output)
+                total.append(previous_amplifier_output)
+
+    elif option == 2:
+        for phase_setting_config in permutations(range(5, 10)):
+            amplifiers = [IntcodeComputer(array, phase_setting)
+                          for phase_setting in phase_setting_config]
+
+            previous_amplifier_output = 0
+
+            while True:
+                for amplifier in amplifiers:
+                    previous_amplifier_output = amplifier.get_output_signal(
+                        previous_amplifier_output)
+
+                if previous_amplifier_output:
+                    total.append(previous_amplifier_output)
+                else:
+                    break
+    return max(total)
+
+
+print('Part 1:', get_result(puzzle_input, 1))
+print('Part 2:', get_result(puzzle_input, 2))
